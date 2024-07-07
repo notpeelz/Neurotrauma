@@ -1,6 +1,2 @@
-
-NeurotraumaLua.code-workspace
-types/
-Guide/Images/
-gitignore/
-.vscode/settings.json
+/types/
+/Guide/Images/
