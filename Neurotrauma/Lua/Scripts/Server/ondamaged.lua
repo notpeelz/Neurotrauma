@@ -136,7 +136,7 @@ NT.OnDamagedMethods.gunshotwound = function(character, strength, limbtype)
       if HF.Chance(0.5) then
         HF.AddAffliction(character, "liverdamage", strength)
       else
-        HF.AddAffliction(character, "kidneydamage", strength)
+        HF.AddAffliction(character, "kidneydamage", strength * 2)
       end
     end
   end
@@ -498,7 +498,7 @@ NT.OnDamagedMethods.blunttrauma = function(character, strength, limbtype)
     HF.AddAffliction(character, "lungdamage", strength * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "heartdamage", strength * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "liverdamage", strength * HF.RandomRange(0, 1))
-    HF.AddAffliction(character, "kidneydamage", strength * HF.RandomRange(0, 1))
+    HF.AddAffliction(character, "kidneydamage", strength * 2 * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "organdamage", strength * HF.RandomRange(0, 1))
 
     if
@@ -605,7 +605,7 @@ NT.OnDamagedMethods.internaldamage = function(character, strength, limbtype)
     HF.AddAffliction(character, "lungdamage", strength * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "heartdamage", strength * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "liverdamage", strength * HF.RandomRange(0, 1))
-    HF.AddAffliction(character, "kidneydamage", strength * HF.RandomRange(0, 1))
+    HF.AddAffliction(character, "kidneydamage", strength * 2 * HF.RandomRange(0, 1))
     HF.AddAffliction(character, "organdamage", strength * HF.RandomRange(0, 1))
 
     if

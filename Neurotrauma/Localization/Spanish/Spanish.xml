@@ -69,21 +69,6 @@
 <entityname.operatingtable>Mesa de cirugía</entityname.operatingtable>
 <entitydescription.operatingtable>Una mesa de cirugía que tiene ventilación artificial básica incorporada.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Bisturí de obtención de órganos: Hígado</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Un bisturí especializado para la extracción de hígados..</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Bisturí de obtención de órganos: Riñones</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Un bisturí especializado para la extracción de riñones..</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Bisturí de obtención de órganos: Pulmones</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Un bisturí especializado para la extracción de los pulmones.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Bisturí de obtención de órganos: Corazón</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Un bisturí especializado para la extracción del corazón.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Bisturí de obtención de órganos: Cerebro</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Un bisturí especializado para la extracción del cerebro.</entitydescription.organscalpel_brain>
-
 
 
 <!-- /// Treatments /// -->
@@ -387,8 +372,11 @@ Puede dar sangre a: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Insuficiencia renal</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Riñones extirpados</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Los riñones han sido extirpados quirúrgicamente.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Riñones extirpados</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Los riñones han sido extirpados quirúrgicamente.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Riñones extirpados</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Los riñones han sido extirpados quirúrgicamente.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

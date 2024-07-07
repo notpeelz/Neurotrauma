@@ -23,7 +23,7 @@ NTMB.Nutrients = {
     func = function(charID, character, level, i)
       -- at less than normal, the kidneys suffer
       if level < 50 then
-        HF.AddAffliction(character, "kidneydamage", 0.025 * NTMB.Deltatime)
+        HF.AddAffliction(character, "kidneydamage", 0.025 * 2 * NTMB.Deltatime)
       end
 
       -- at less than 40, the person dies
@@ -33,7 +33,7 @@ NTMB.Nutrients = {
         -- dehydration causes the water to be drawn from the organs and brain, trading damage in those areas for being rehydrated
         HF.AddAffliction(character, "organdamage", damage)
         HF.AddAffliction(character, "liverdamage", damage)
-        HF.AddAffliction(character, "kidneydamage", damage)
+        HF.AddAffliction(character, "kidneydamage", damage * 2)
         HF.AddAffliction(character, "lungdamage", damage)
         HF.AddAffliction(character, "heartdamage", damage)
         HF.AddAffliction(character, "cerebralhypoxia", damage)
@@ -96,7 +96,7 @@ NTMB.Nutrients = {
       -- at very low levels, cause acidosis and kidney damage
       if level <= 0 then
         HF.AddAffliction(character, "acidosis", NTMB.Deltatime * 0.1)
-        HF.AddAffliction(character, "kidneydamage", NTMB.Deltatime * 0.1)
+        HF.AddAffliction(character, "kidneydamage", 2 * NTMB.Deltatime * 0.1)
       end
     end,
   },

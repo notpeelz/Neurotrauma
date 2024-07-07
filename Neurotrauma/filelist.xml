@@ -33,27 +33,6 @@
   <Text file="%ModDir%/Localization/Turkish/Turkish.xml" />
   <Text file="%ModDir%/Localization/German/German.xml" />
 
-  <Other file="%ModDir%/Lua/Autorun/init.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Client/configgui.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Client/MultiLineTextBox.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/convertbloodpacks.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/fuckbots.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/blood.lua" />
-  <Other file="%ModDir%/Lua/Scripts/helperfunctions.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/humanupdate.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/items.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/onfire.lua" />
-  <Other file="%ModDir%/Lua/Scripts/configdata.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/ondamaged.lua" />
-	<Other file="%ModDir%/Lua/Scripts/Server/surgerytable.lua" />
-	<Other file="%ModDir%/Lua/Scripts/Server/lootcrates.lua" />
-	<Other file="%ModDir%/Lua/Scripts/Server/falldamage.lua" />
-	<Other file="%ModDir%/Lua/Scripts/Server/screams.lua" />
-  <Other file="%ModDir%/Lua/Scripts/testing.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/cpr.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/ntcompat.lua" />
-  <Other file="%ModDir%/Lua/Scripts/Server/modconflict.lua" />
-
   <Other file="%ModDir%/Sound/Pageturn.ogg" />
   <Other file="%ModDir%/Sound/drill.ogg" />
   <Other file="%ModDir%/Sound/squelch1.ogg" />
@@ -129,5 +108,5 @@
   <Other     file="%ModDir%/Characters/Human/Ragdolls/HumanDefaultRagdoll.xml" />
 
   <Other file="%ModDir%/Credits.txt" />
-  
+
 </contentpackage>

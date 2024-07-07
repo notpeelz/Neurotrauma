@@ -69,21 +69,6 @@
 <entityname.operatingtable>Table d'opération</entityname.operatingtable>
 <entitydescription.operatingtable>Une table d'opération dotée d'une ventilation artificielle intégrée.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Scalpel de prélèvement d'organe: Foie</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Un scalpel spécialisé pour la récupération de foies.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Scalpel de prélèvement d'organe: Reins</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Un scalpel spécialisé pour la récupération de reins.</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Scalpel de prélèvement d'organe: Poumons</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Un scalpel spécialisé pour la récupération de poumons.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Scalpel de prélèvement d'organe: Cœur</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Un scalpel spécialisé pour la récupération de cœurs.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Scalpel de prélèvement d'organe: Cerveau</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Un scalpel spécialisé pour la récupération du cerveau.</entitydescription.organscalpel_brain>
-
 
 
 <!-- /// Treatments /// -->
@@ -387,8 +372,11 @@ Peut donner du sang à: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Insuffisance rénale</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Reins retirés</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Les reins ont été chirurgicalement retirés.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Reins retirés</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Les reins ont été chirurgicalement retirés.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Reins retirés</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Les reins ont été chirurgicalement retirés.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

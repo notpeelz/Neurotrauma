@@ -16,18 +16,12 @@ AffectedItems = {
   "propofol", -- 异丙酚
   "mannitol", -- 甘露醇
   "pressuremeds", -- 压力药物
-  "multiscalpel", -- 多功能手术刀
   "advscalpel", -- 手术刀
   "advhemostat", -- 止血钳
   "advretractors", -- 皮肤牵引器
   "tweezers", -- 镊子
   "surgicaldrill", -- 骨钻
   "surgerysaw", -- 手术锯
-  "organscalpel_liver", -- 器官切割刀：肝脏
-  "organscalpel_lungs", -- 器官切割刀：肺
-  "organscalpel_kidneys", -- 器官切割刀：肾脏
-  "organscalpel_heart", -- 器官切割刀：心脏
-  "organscalpel_brain", -- 器官切割刀：大脑
   "emptybloodpack", -- 空血袋
   "alienblood", -- 异星血浆
   "tourniquet", -- 止血带

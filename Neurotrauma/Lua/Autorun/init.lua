@@ -1,10 +1,12 @@
---if Game.IsMultiplayer and CLIENT then return end
-
-NT = {} -- Neurotrauma
+NT = {}
 NT.Name = "Neurotrauma"
 NT.Version = "A1.9.4"
 NT.VersionNum = 01090400
 NT.Path = table.pack(...)[1]
+
+-- DELETEME: hack to prevent not-yet-refactored code from crashing in MP
+NT.ItemMethods = {}
+NT.ItemStartsWithMethods = {}
 
 dofile(NT.Path .. "/Lua/Scripts/helperfunctions.lua")
 
@@ -54,7 +56,6 @@ if (Game.IsMultiplayer and SERVER) or not Game.IsMultiplayer then
 
   dofile(NT.Path .. "/Lua/Scripts/Server/ntcompat.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/blood.lua")
-  dofile(NT.Path .. "/Lua/Scripts/Server/humanupdate.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/ondamaged.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/items.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/onfire.lua")
@@ -62,12 +63,9 @@ if (Game.IsMultiplayer and SERVER) or not Game.IsMultiplayer then
   dofile(NT.Path .. "/Lua/Scripts/Server/surgerytable.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/fuckbots.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/lootcrates.lua")
-  dofile(NT.Path .. "/Lua/Scripts/Server/multiscalpel.lua") -- its important for this to run after items.lua
   dofile(NT.Path .. "/Lua/Scripts/Server/falldamage.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/screams.lua")
   dofile(NT.Path .. "/Lua/Scripts/Server/modconflict.lua")
-
-  dofile(NT.Path .. "/Lua/Scripts/testing.lua")
 end
 
 -- client-side code
@@ -75,6 +73,37 @@ if CLIENT then
   dofile(NT.Path .. "/Lua/Scripts/Client/configgui.lua")
 end
 
+require("NT.scheduler")
+require("NT.afflictions")
+require("NT.stats")
+require("NT.pain")
+require("NT.buffs")
+require("NT.drugs")
+require("NT.blood")
+require("NT.limbs")
+require("NT.stun")
+require("NT.damage")
+require("NT.bandage")
+require("NT.surgery")
+require("NT.radiation")
+require("NT.symptoms")
+require("NT.organs")
+require("NT.organs.brain")
+require("NT.organs.heart")
+require("NT.organs.kidneys")
+require("NT.organs.liver")
+require("NT.organs.lungs")
+
+require("NT.scalpel")
+require("NT.feedbacksound")
+
+if CLIENT then
+  require("NT.healthcontextmenu")
+  require("NT.interactiveitems")
+end
+
+Hook.Call("Neurotrauma.init")
+
 -- Consent Required Extended with adjustments
 -- mod page: https://steamcommunity.com/sharedfiles/filedetails/?id=2892602084
-dofile(NT.Path .. "/Lua/ConsentRequiredExtended/init.lua")
+-- dofile(NT.Path .. "/Lua/ConsentRequiredExtended/init.lua")

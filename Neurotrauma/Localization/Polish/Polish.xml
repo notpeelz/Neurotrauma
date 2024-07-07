@@ -69,21 +69,6 @@
 <entityname.operatingtable>Stół chirurgiczny</entityname.operatingtable>
 <entitydescription.operatingtable>Stół operacyjny z wbudowaną podstawową sztuczną wentylacją.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Skalpel do pobierania narządów: Wątroba</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Specjalistyczny skalpel do usuwania wątroby.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Skalpel do pobierania narządów: Nerki</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Specjalistyczny skalpel do usuwania nerek.</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Skalpel do pobierania narządów: Płuca</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Specjalistyczny skalpel do usuwania płuc.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Skalpel do pobierania narządów: Serce</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Specjalistyczny skalpel do usuwania serca.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Skalpel do pobierania narządów: Mózgu</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Specjalistyczny skalpel do usuwania mózgu.</entitydescription.organscalpel_brain>
-
 
 
 <!-- /// Treatments /// -->
@@ -387,8 +372,11 @@ Biorcy: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Niewydolność nerek</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Usunięte nerki</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Nerki zostały usunięte chirurgicznie.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Usunięte nerki</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Nerki zostały usunięte chirurgicznie.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Usunięte nerki</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Nerki zostały usunięte chirurgicznie.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

@@ -527,7 +527,7 @@ NTTut.scenarios = {
         HF.SetAffliction(character, "organdamage", 20)
         HF.SetAffliction(character, "heartdamage", 20)
         HF.SetAffliction(character, "lungdamage", 20)
-        HF.SetAffliction(character, "kidneydamage", 20)
+        HF.SetAffliction(character, "kidneydamage", 40)
         HF.SetAffliction(character, "liverdamage", 20)
         for i = 1, 2, 1 do
           HF.GiveItem(character, "antibiotics")
@@ -753,7 +753,7 @@ NTTut.scenarios = {
         HF.SetAffliction(character, "organdamage", 100)
         HF.SetAffliction(character, "heartdamage", 100)
         HF.SetAffliction(character, "lungdamage", 100)
-        HF.SetAffliction(character, "kidneydamage", 100)
+        HF.SetAffliction(character, "kidneydamage", 200)
         HF.SetAffliction(character, "liverdamage", 100)
         HF.SetAffliction(character, "stun", 8)
         for i = 1, 3, 1 do
@@ -794,7 +794,7 @@ NTTut.scenarios = {
         not HF.HasAffliction(data.character, "sym_unconsciousness")
         and not HF.HasAffliction(data.character, "heartdamage", 30)
         and not HF.HasAffliction(data.character, "lungdamage", 30)
-        and not HF.HasAffliction(data.character, "kidneydamage", 30)
+        and not HF.HasAffliction(data.character, "kidneydamage", 60)
         and not HF.HasAffliction(data.character, "liverdamage", 30)
       then
         state = 2
@@ -890,7 +890,7 @@ NTTut.scenarios = {
         HF.SetAffliction(character, "organdamage", 40)
         HF.SetAffliction(character, "heartdamage", 40)
         HF.SetAffliction(character, "lungdamage", 40)
-        HF.SetAffliction(character, "kidneydamage", 40)
+        HF.SetAffliction(character, "kidneydamage", 80)
         HF.SetAffliction(character, "liverdamage", 40)
         for i = 1, 4, 1 do
           HF.GiveItem(character, "antirad")
@@ -919,7 +919,7 @@ NTTut.scenarios = {
         and not HF.HasAffliction(data.character, "sym_unconsciousness")
         and not HF.HasAffliction(data.character, "heartdamage", 40)
         and not HF.HasAffliction(data.character, "lungdamage", 40)
-        and not HF.HasAffliction(data.character, "kidneydamage", 40)
+        and not HF.HasAffliction(data.character, "kidneydamage", 80)
         and not HF.HasAffliction(data.character, "liverdamage", 40)
       then
         state = 2

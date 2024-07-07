@@ -193,12 +193,13 @@ Timer.Wait(function()
       if c.afflictions.liverdamage.strength < 99 then
         c.afflictions.liverdamage.strength = c.afflictions.liverdamage.strength - 0.5 * NT.Deltatime
       end
-      if c.afflictions.kidneydamage.strength < 50 then
-        c.afflictions.kidneydamage.strength = c.afflictions.kidneydamage.strength
+      if c.afflictions.kidney1damage.strength < 99 then
+        c.afflictions.kidney1damage.strength = c.afflictions.kidney1damage.strength
           - 0.5 * NT.Deltatime
-      elseif c.afflictions.kidneydamage.strength < 99 then
-        c.afflictions.kidneydamage.strength =
-          HF.Clamp(c.afflictions.kidneydamage.strength - 0.5 * NT.Deltatime, 51, 100)
+      end
+      if c.afflictions.kidney2damage.strength < 99 then
+        c.afflictions.kidney2damage.strength = c.afflictions.kidney2damage.strength
+          - 0.5 * NT.Deltatime
       end
 
       -- do some good

@@ -42,6 +42,12 @@
 <entityname.advscalpel>Scalpel</entityname.advscalpel>
 <entitydescription.advscalpel>A tool used to make incisions during surgery.</entitydescription.advscalpel>
 
+<advscalpel.menu.btn.heart>Remove heart</advscalpel.menu.btn.heart>
+<advscalpel.menu.btn.kidney>Remove kidney</advscalpel.menu.btn.kidney>
+<advscalpel.menu.btn.liver>Remove liver</advscalpel.menu.btn.liver>
+<advscalpel.menu.btn.lungs>Remove lungs</advscalpel.menu.btn.lungs>
+<advscalpel.menu.btn.brain>Remove brain</advscalpel.menu.btn.brain>
+
 <entityname.advhemostat>Hemostat</entityname.advhemostat>
 <entitydescription.advhemostat>A tool used to clamp blood vessels during surgery.</entitydescription.advhemostat>
 
@@ -68,41 +74,6 @@
 
 <entityname.operatingtable>Surgery table</entityname.operatingtable>
 <entitydescription.operatingtable>A surgery table which has basic artificial ventilation built in.</entitydescription.operatingtable>
-
-<entityname.organscalpel_liver>Organ procurement scalpel: Liver</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>A specialized scalpel for the removal of livers.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Organ procurement scalpel: Kidneys</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>A specialized scalpel for the removal of kidneys.</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Organ procurement scalpel: Lungs</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>A specialized scalpel for the removal of the lungs.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Organ procurement scalpel: Heart</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>A specialized scalpel for the removal of the heart.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Organ procurement scalpel: Brain</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>A specialized scalpel for the removal of the brain.</entitydescription.organscalpel_brain>
-
-<entityname.multiscalpel>Multipurpose scalpel</entityname.multiscalpel>
-<entitydescription.multiscalpel>A scalpel you can choose what to do with, be it make an incision, extract organs, remove bandages, or do malpractice.</entitydescription.multiscalpel>
-<multiscalpel.incision>Mode: Surgery incision</multiscalpel.incision>
-<multiscalpel.kidneys>Mode: Extract kidneys</multiscalpel.kidneys>
-<multiscalpel.liver>Mode: Extract liver</multiscalpel.liver>
-<multiscalpel.lungs>Mode: Extract lungs</multiscalpel.lungs>
-<multiscalpel.heart>Mode: Extract heart</multiscalpel.heart>
-<multiscalpel.brain>Mode: Extract brain</multiscalpel.brain>
-<multiscalpel.bandage>Mode: Remove bandages and casts / malpractice</multiscalpel.bandage>
-<multiscalpel.speedflex>Mode: Adaptive organ extraction. Use on head for brain, left arm for kidneys, torso for liver, right arm for heart, left leg for lungs.</multiscalpel.speedflex>
-
-<multiscalpel.btn.incision>Incision</multiscalpel.btn.incision>
-<multiscalpel.btn.kidneys>Kidneys</multiscalpel.btn.kidneys>
-<multiscalpel.btn.liver>Liver</multiscalpel.btn.liver>
-<multiscalpel.btn.lungs>Lungs</multiscalpel.btn.lungs>
-<multiscalpel.btn.heart>Heart</multiscalpel.btn.heart>
-<multiscalpel.btn.brain>Brain</multiscalpel.btn.brain>
-<multiscalpel.btn.bandage>Bandages, casts, malpractice</multiscalpel.btn.bandage>
-<multiscalpel.btn.speedflex>Adaptive organ extraction</multiscalpel.btn.speedflex>
 
 
 
@@ -416,8 +387,11 @@ Can give blood to: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Kidney failure</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Kidneys removed</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>The kidneys have been surgically removed.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Kidney removed</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>A kidney has been surgically removed.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Kidney removed</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>A kidney has been surgically removed.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

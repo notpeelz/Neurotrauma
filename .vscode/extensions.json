@@ -1,5 +1,7 @@
 {
   "recommendations": [
-    "johnnymorganz.stylua"
-  ]
+    "johnnymorganz.stylua",
+    "dwenegar.vscode-luacheck",
+    "sumneko.lua",
+  ],
 }

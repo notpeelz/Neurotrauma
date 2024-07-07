@@ -47,16 +47,6 @@
 <entitydescription.spinalimplant>Implantes de titânio usados ​​para curar paralisia causada por fraturas do pescoço.</entitydescription.spinalimplant>
 <entityname.operatingtable>Mesa de Cirurgia</entityname.operatingtable>
 <entitydescription.operatingtable>Uma mesa de cirurgia que possui ventilação artificial básica embutida.</entitydescription.operatingtable>
-<entityname.organscalpel_liver>Bisturi para Aquisição de Órgãos: Fígado</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Um bisturi especializado para a remoção do fígado.</entitydescription.organscalpel_liver>
-<entityname.organscalpel_kidneys>Bisturi para Aquisição de Órgãos: Rins</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Um bisturi especializado para a remoção de rins.</entitydescription.organscalpel_kidneys>
-<entityname.organscalpel_lungs>Bisturi para Aquisição de Órgãos: Pulmões</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Um bisturi especializado para a remoção de pulmões.</entitydescription.organscalpel_lungs>
-<entityname.organscalpel_heart>Bisturi para Aquisição de Órgãos: Coração</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Um bisturi especializado para a remoção do coração.</entitydescription.organscalpel_heart>
-<entityname.organscalpel_brain>Bisturi para Aquisição de Órgãos: Cérebro</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Um bisturi especializado para a remoção do cérebro.</entitydescription.organscalpel_brain>
 <!-- /// Treatments /// -->
 <entityname.mannitol>Manitol</entityname.mannitol>
 <entitydescription.mannitol>Um tipo de álcool de açúcar. É usado para ajudar na recuperação de neurotrauma. Pode causar danos aos órgãos.</entitydescription.mannitol>
@@ -261,8 +251,10 @@ Pode dar sangue para: AB+</entitydescription.abpluscard>
 <afflictiondescription.kidneydamage></afflictiondescription.kidneydamage>
 <afflictionname.kidneyfailure>Falência Renal</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
-<afflictionname.kidneyremoved>Rins Removidos</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Os rins foram removidos cirurgicamente.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Rins Removidos</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Os rins foram removidos cirurgicamente.</afflictiondescription.kidney1removed>
+<afflictionname.kidney2removed>Rins Removidos</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Os rins foram removidos cirurgicamente.</afflictiondescription.kidney2removed>
 <!-- /// bones /// -->
 <afflictionname.bonedamage>Dano Ósseo</afflictionname.bonedamage>
 <afflictiondescription.bone></afflictiondescription.bone>

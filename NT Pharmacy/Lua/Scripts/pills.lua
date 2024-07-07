@@ -180,7 +180,7 @@ NTP.PillData.items = {
     skillrequirement = 72,
     effects = {
       { type = "addeffect", identifier = "organdamage", amount = 2.5 },
-      { type = "addeffect", identifier = "kidneydamage", amount = 2.5 },
+      { type = "addeffect", identifier = "kidneydamage", amount = 5 },
       { type = "addeffect", identifier = "heartdamage", amount = 2.5 },
       { type = "addeffect", identifier = "lungdamage", amount = 2.5 },
       { type = "addeffect", identifier = "liverdamage", amount = 2.5 },
@@ -188,7 +188,7 @@ NTP.PillData.items = {
     },
     faileffects = {
       { type = "addeffect", identifier = "organdamage", amount = 2.5 },
-      { type = "addeffect", identifier = "kidneydamage", amount = 2.5 },
+      { type = "addeffect", identifier = "kidneydamage", amount = 5 },
       { type = "addeffect", identifier = "heartdamage", amount = 2.5 },
       { type = "addeffect", identifier = "lungdamage", amount = 2.5 },
       { type = "addeffect", identifier = "liverdamage", amount = 2.5 },

@@ -1,19 +1,85 @@
--- Neurotrauma human update functions
--- Hooks Lua event "think" to update and use for applying NT specific character data (its called 'c') with
--- values/functions defined here in NT.UpdateHuman, NT.LimbAfflictions and NT.Afflictions
-NT.UpdateCooldown = 0
-NT.UpdateInterval = 120
-NT.Deltatime = NT.UpdateInterval / 60 -- Time in seconds that transpires between updates
+-- the interval (in game ticks) at which all Neurotrauma state is updated, i.e. afflictions, stats, etc.
+local UPDATE_INTERVAL = 120
+-- the number of buckets in which scheduled updates will be distributed
+local BUCKET_COUNT = 120
+-- the interval (in game ticks) at which bucket entries are processed
+local SCHEDULER_INTERVAL = math.floor(UPDATE_INTERVAL / BUCKET_COUNT)
 
+-- Barotrauma updates at a fixed rate of 60 tick/s,
+-- which means you can think of this as roughly ~2s (under normal circumstances).
+-- NOTE: there's no mechanism to account for the lost time between ticks
+--       if the game isn't able to keep up with the update rate.
+NT.Deltatime = UPDATE_INTERVAL / 60
+
+NT.Scheduler = {
+  buckets = {},
+  nextBuckets = {},
+  bucketIdx = 1,
+  nextBucketIdx = 1,
+}
+
+for i = 1, BUCKET_COUNT do
+  table.insert(NT.Scheduler.buckets, {})
+  table.insert(NT.Scheduler.nextBuckets, {})
+end
+
+function NT.Scheduler:update()
+  if self.bucketIdx > #self.buckets then
+    return
+  end
+  for bucket in self.buckets[self.bucketIdx] do
+    for fn in bucket do
+      fn()
+    end
+  end
+  -- empty the bucket
+  self.buckets[self.bucketIdx] = {}
+  -- move to the next bucket
+  self.bucketIdx = self.bucketIdx + 1
+end
+
+function NT.Scheduler:schedule(fn)
+  local idx = self.nextBucketIdx
+  table.insert(self.nextBuckets[idx], fn)
+  -- next fn will be assigned to the next bucket
+  self.nextBucketIdx = self.nextBucketIdx + 1
+  -- loop around to the first bucket if we've reached the last bucket
+  if self.nextBucketIdx > #self.nextBuckets then
+    self.nextBucketIdx = 1
+  end
+  return idx
+end
+
+function NT.Scheduler:swapBuckets()
+  -- NOTE: all the old buckets should be empty when calling this function
+  local old = self.buckets
+  self.buckets = self.nextBuckets
+  self.nextBuckets = old
+  self.bucketIdx = 1
+  self.nextBucketIdx = 1
+end
+
+local schedulerTime = 0
+local updateTime = 0
+
+-- hook the game loop (runs 60 times per second)
 Hook.Add("think", "NT.update", function()
   if HF.GameIsPaused() then
     return
   end
 
-  NT.UpdateCooldown = NT.UpdateCooldown - 1
-  if NT.UpdateCooldown <= 0 then
-    NT.UpdateCooldown = NT.UpdateInterval
+  schedulerTime = schedulerTime + 1
+  updateTime = updateTime + 1
+
+  if schedulerTime >= SCHEDULER_INTERVAL then
+    schedulerTime = 0
+    NT.Scheduler:update()
+  end
+
+  if updateTime >= UPDATE_INTERVAL then
+    updateTime = 0
     NT.Update()
+    NT.Scheduler:swapBuckets()
   end
 
   NT.TickUpdate()
@@ -21,12 +87,19 @@ end)
 
 -- gets run once every two seconds
 function NT.Update()
+  -- some afflictions need to keep track of changes between ticks
+  for identifier, data in pairs(NT.Afflictions) do
+    if data.onTickStart ~= nil then
+      data.onTickStart(identifier)
+    end
+  end
+
   local updateHumans = {}
   local amountHumans = 0
   local updateMonsters = {}
   local amountMonsters = 0
 
-  -- fetchcharacters to update
+  -- fetch characters to update
   for key, character in pairs(Character.CharacterList) do
     if not character.IsDead then
       if character.IsHuman then
@@ -39,27 +112,25 @@ function NT.Update()
     end
   end
 
-  -- we spread the characters out over the duration of an update so that the load isnt done all at once
-  for key, value in pairs(updateHumans) do
+  for key, value in ipairs(updateHumans) do
     -- make sure theyre still alive and human
     if value ~= nil and not value.Removed and value.IsHuman and not value.IsDead then
-      Timer.Wait(function()
+      local bucketIdx = NT.Scheduler:schedule(function()
         if value ~= nil and not value.Removed and value.IsHuman and not value.IsDead then
           NT.UpdateHuman(value)
         end
-      end, ((key + 1) / amountHumans) * NT.Deltatime * 1000)
+      end)
     end
   end
 
-  -- we spread the monsters out over the duration of an update so that the load isnt done all at once
-  for key, value in pairs(updateMonsters) do
+  for key, value in ipairs(updateMonsters) do
     -- make sure theyre still alive
     if value ~= nil and not value.Removed and not value.IsDead then
-      Timer.Wait(function()
+      NT.Scheduler:schedule(function()
         if value ~= nil and not value.Removed and not value.IsDead then
           NT.UpdateMonster(value)
         end
-      end, ((key + 1) / amountMonsters) * NT.Deltatime * 1000)
+      end)
     end
   end
 end
@@ -89,20 +160,6 @@ NT.organDamageCalc = function(c, damagevalue)
   end
   return damagevalue
     - 0.01 * c.stats.healingrate * c.stats.specificOrganDamageHealMultiplier * NT.Deltatime
-end
-local function kidneyDamageCalc(c, damagevalue)
-  if damagevalue >= 99 then
-    return 100
-  end
-  if damagevalue >= 50 then
-    if damagevalue <= 51 then
-      return damagevalue
-    end
-    return damagevalue
-      - 0.01 * c.stats.healingrate * c.stats.specificOrganDamageHealMultiplier * NT.Deltatime
-  end
-  return damagevalue
-    - 0.02 * c.stats.healingrate * c.stats.specificOrganDamageHealMultiplier * NT.Deltatime
 end
 local function isExtremity(type)
   return type ~= LimbType.Torso and type ~= LimbType.Head
@@ -207,297 +264,6 @@ NT.Afflictions = {
     end,
   },
 
-  -- Organ conditions
-  cardiacarrest = {
-    update = function(c, i)
-      -- triggers
-      if
-        not NTC.GetSymptomFalse(c.character, "triggersym_cardiacarrest")
-        and (
-          NTC.GetSymptom(c.character, "triggersym_cardiacarrest")
-          or c.stats.stasis
-          or c.afflictions.heartremoved.strength > 0
-          or c.afflictions.brainremoved.strength > 0
-          or (c.afflictions.heartdamage.strength > 99 and HF.Chance(0.3))
-          or (c.afflictions.traumaticshock.strength > 40 and HF.Chance(0.1))
-          or (c.afflictions.coma.strength > 40 and HF.Chance(0.03))
-          or (c.afflictions.hypoxemia.strength > 80 and HF.Chance(0.01))
-          or (
-            c.afflictions.fibrillation.strength > 20
-            and HF.Chance((c.afflictions.fibrillation.strength / 100) ^ 4)
-          )
-        )
-      then
-        c.afflictions[i].strength = c.afflictions[i].strength + 10
-      end
-    end,
-  },
-  respiratoryarrest = {
-    update = function(c, i)
-      -- passive regen
-      c.afflictions[i].strength = c.afflictions[i].strength
-        - (0.05 + HF.BoolToNum(c.afflictions.sym_unconsciousness.strength < 0.1, 0.45))
-          * NT.Deltatime
-      -- triggers
-      if
-        not NTC.GetSymptomFalse(c.character, "triggersym_respiratoryarrest")
-        and (
-          NTC.GetSymptom(c.character, "triggersym_respiratoryarrest")
-          or c.stats.stasis
-          or c.afflictions.lungremoved.strength > 0
-          or c.afflictions.brainremoved.strength > 0
-          or c.afflictions.opiateoverdose.strength > 60
-          or (c.afflictions.lungdamage.strength > 99 and HF.Chance(0.8))
-          or (c.afflictions.traumaticshock.strength > 30 and HF.Chance(0.2))
-          or (
-            (c.afflictions.cerebralhypoxia.strength > 100 or c.afflictions.hypoxemia.strength > 70)
-            and HF.Chance(0.05)
-          )
-        )
-      then
-        c.afflictions[i].strength = c.afflictions[i].strength + 10
-      end
-    end,
-  },
-  pneumothorax = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = HF.Clamp(
-          c.afflictions[i].strength
-            + NT.Deltatime
-              * (
-                0.5 -- gain 0.5/s
-                - HF.BoolToNum(c.afflictions[i].strength > 15)
-                  * HF.Clamp(c.afflictions.needlec.strength, 0, 1)
-              ), -- ...except if needled and >15%, then lose 0.5/s
-          0,
-          100
-        )
-      end
-    end,
-  },
-  tamponade = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = c.afflictions[i].strength + NT.Deltatime * 0.5
-      end
-
-      if c.afflictions.heartremoved.strength > 0 then
-        c.afflictions[i].strength = 0
-      end
-    end,
-  },
-  heartattack = {
-    update = function(c, i)
-      c.afflictions[i].strength = c.afflictions[i].strength - NT.Deltatime
-
-      -- triggers
-      if
-        not NTC.GetSymptomFalse(c.character, "triggersym_heartattack")
-        and not c.stats.stasis
-        and c.afflictions.afstreptokinase.strength <= 0
-        and c.afflictions.heartremoved.strength <= 0
-        and (
-          NTC.GetSymptom(c.character, "triggersym_heartattack")
-          or (
-            c.afflictions.bloodpressure.strength > 150
-            and HF.Chance(
-              NTConfig.Get("NT_heartattackChance", 1)
-                * ((c.afflictions.bloodpressure.strength - 150) / 50 * 0.02)
-            )
-          )
-        )
-      then
-        c.afflictions[i].strength = c.afflictions[i].strength + 50
-      end
-
-      if c.afflictions.heartremoved.strength > 0 then
-        c.afflictions[i].strength = 0
-      end
-    end,
-  },
-  -- Organs removed
-  brainremoved = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = 1
-          + HF.BoolToNum(HF.HasAfflictionLimb(c.character, "retractedskin", LimbType.Head, 99), 99)
-      end
-    end,
-  },
-  heartremoved = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = 1
-          + HF.BoolToNum(HF.HasAfflictionLimb(c.character, "retractedskin", LimbType.Torso, 99), 99)
-      end
-    end,
-  },
-  lungremoved = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = 1
-          + HF.BoolToNum(HF.HasAfflictionLimb(c.character, "retractedskin", LimbType.Torso, 99), 99)
-      end
-    end,
-  },
-  liverremoved = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = 1
-          + HF.BoolToNum(HF.HasAfflictionLimb(c.character, "retractedskin", LimbType.Torso, 99), 99)
-      end
-    end,
-  },
-  kidneyremoved = {
-    update = function(c, i)
-      if c.afflictions[i].strength > 0 then
-        c.afflictions[i].strength = 1
-          + HF.BoolToNum(HF.HasAfflictionLimb(c.character, "retractedskin", LimbType.Torso, 99), 99)
-      end
-    end,
-  },
-  -- Organ damage
-  cerebralhypoxia = {
-    max = 200,
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      -- calculate new neurotrauma
-      local gain = (
-        -0.1 * c.stats.healingrate -- passive regen
-        + c.afflictions.hypoxemia.strength / 100 -- from hypoxemia
-        + HF.Clamp(c.afflictions.stroke.strength, 0, 20) * 0.1 -- from stroke
-        + c.afflictions.sepsis.strength / 100 * 0.4 -- from sepsis
-        + c.afflictions.liverdamage.strength / 800 -- from liverdamage
-        + c.afflictions.kidneydamage.strength / 1000 -- from kidneydamage
-        + c.afflictions.traumaticshock.strength / 100 -- from traumatic shock
-      ) * NT.Deltatime
-
-      if gain > 0 then
-        gain = gain
-          * NTC.GetMultiplier(c.character, "neurotraumagain") -- NTC multiplier
-          * NTConfig.Get("NT_neurotraumaGain", 1) -- Config multiplier
-          * (1 - HF.Clamp(c.afflictions.afmannitol.strength, 0, 0.5)) -- half if mannitol
-      end
-
-      c.afflictions[i].strength = c.afflictions[i].strength + gain
-
-      c.afflictions[i].strength = HF.Clamp(c.afflictions[i].strength, 0, 200)
-    end,
-  },
-  heartdamage = {
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = NT.organDamageCalc(
-        c,
-        c.afflictions[i].strength
-          + NTC.GetMultiplier(c.character, "heartdamagegain")
-            * (c.stats.neworgandamage + HF.Clamp(c.afflictions.heartattack.strength, 0, 0.5) * NT.Deltatime)
-      )
-    end,
-  },
-  lungdamage = {
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = NT.organDamageCalc(
-        c,
-        c.afflictions.lungdamage.strength
-          + NTC.GetMultiplier(c.character, "lungdamagegain")
-            * (c.stats.neworgandamage + math.max(c.afflictions.radiationsickness.strength - 25, 0) / 800 * NT.Deltatime)
-      )
-    end,
-  },
-  liverdamage = {
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = NT.organDamageCalc(
-        c,
-        c.afflictions.liverdamage.strength
-          + NTC.GetMultiplier(c.character, "liverdamagegain") * c.stats.neworgandamage
-      )
-      if
-        c.afflictions[i].strength >= 99
-        and not NTC.GetSymptom(c.character, "sym_hematemesis")
-        and HF.Chance(0.05)
-      then
-        -- if liver failed: 5% chance for 6-20 seconds of blood vomiting and internal bleeding
-        NTC.SetSymptomTrue(c.character, "sym_hematemesis", math.random(3, 10))
-        c.afflictions.internalbleeding.strength = c.afflictions.internalbleeding.strength + 2
-      end
-    end,
-  },
-  kidneydamage = {
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = kidneyDamageCalc(
-        c,
-        c.afflictions.kidneydamage.strength
-          + NTC.GetMultiplier(c.character, "kidneydamagegain")
-            * (c.stats.neworgandamage + HF.Clamp(
-              (c.afflictions.bloodpressure.strength - 120) / 160,
-              0,
-              0.5
-            ) * NT.Deltatime * 0.5)
-      )
-      if
-        c.afflictions[i].strength >= 60
-        and not NTC.GetSymptom(c.character, "sym_vomiting")
-        and HF.Chance((c.afflictions[i].strength - 60) / 40 * 0.07)
-      then
-        -- at 60% kidney damage: 0% chance for vomiting
-        -- at 100% kidney damage: 7% chance for vomiting
-        NTC.SetSymptomTrue(c.character, "sym_vomiting", math.random(3, 10))
-      end
-    end,
-  },
-  bonedamage = {
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = NT.organDamageCalc(
-        c,
-        c.afflictions.bonedamage.strength
-          + NTC.GetMultiplier(c.character, "bonedamagegain")
-            * (c.afflictions.sepsis.strength / 500 + c.afflictions.hypoxemia.strength / 1000 + math.max(
-              c.afflictions.radiationsickness.strength - 25,
-              0
-            ) / 600)
-            * NT.Deltatime
-      )
-      if c.afflictions[i].strength < 90 then
-        c.afflictions[i].strength = c.afflictions[i].strength
-          - (c.stats.bonegrowthCount * 0.3) * NT.Deltatime
-      elseif c.stats.bonegrowthCount >= 6 then
-        c.afflictions[i].strength = c.afflictions[i].strength - 2 * NT.Deltatime
-      end
-      if c.afflictions.kidneydamage.strength > 70 then
-        c.afflictions[i].strength = c.afflictions[i].strength
-          + (c.afflictions.kidneydamage.strength - 70) / 30 * 0.15 * NT.Deltatime
-      end
-    end,
-  },
-  organdamage = {
-    max = 200,
-    update = function(c, i)
-      if c.stats.stasis then
-        return
-      end
-      c.afflictions[i].strength = c.afflictions[i].strength
-        + c.stats.neworgandamage
-        - 0.03 * c.stats.healingrate * NT.Deltatime
-    end,
-  },
   -- Blood
   sepsis = {
     update = function(c, i)
@@ -565,7 +331,7 @@ NT.Afflictions = {
         + HF.Clamp(c.afflictions.afringerssolution.strength * 5, 0, 30) -- +30 if ringers
       )
         * (1 + 0.5 * ((c.afflictions.liverdamage.strength / 100) ^ 2)) -- elevated if full liver damage
-        * (1 + 0.5 * ((c.afflictions.kidneydamage.strength / 100) ^ 2)) -- elevated if full kidney damage
+        * (1 + 0.5 * ((c.afflictions.kidneydamage.strength / 200) ^ 2)) -- elevated if full kidney damage
         * (1 + c.afflictions.alcoholwithdrawal.strength / 200) -- elevated if alcohol withdrawal
         * HF.Clamp(
           (100 - c.afflictions.traumaticshock.strength * 2) / 100,
@@ -675,7 +441,7 @@ NT.Afflictions = {
               0,
               1
             ) * 0.18
-            + math.max(0, c.afflictions.kidneydamage.strength - 80) / 20 * 0.1
+            + math.max(0, c.afflictions.kidneydamage.strength - 160) / 20 * 0.1
           )
           * NT.Deltatime
     end,
@@ -1200,7 +966,7 @@ NT.Afflictions = {
           and (
             NTC.GetSymptom(c.character, i)
             or c.afflictions.liverdamage.strength > 40
-            or c.afflictions.kidneydamage.strength > 60
+            or c.afflictions.kidneydamage.strength > 120
             or c.afflictions.heartdamage.strength > 80
           ),
         2
@@ -1257,7 +1023,7 @@ NT.Afflictions = {
         not NTC.GetSymptomFalse(c.character, i)
           and (
             NTC.GetSymptom(c.character, i)
-            or c.afflictions.kidneydamage.strength > 60
+            or c.afflictions.kidneydamage.strength > 120
             or c.afflictions.radiationsickness.strength > 80
             or (c.afflictions.hemotransfusionshock.strength > 0 and c.afflictions.hemotransfusionshock.strength < 90)
             or c.stats.withdrawal > 40

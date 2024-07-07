@@ -59,18 +59,6 @@
 <entityname.operatingtable>Chirurgischer Tisch</entityname.operatingtable>
 <entitydescription.operatingtable>Ein Tisch mit eingebauter künstlicher Beatmung.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Organbeschaffungsskalpel: Leber</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Ein spezialisiertes Skalpel für die Entfernung der Leber.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Organbeschaffungsskalpel: Nieren</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Ein spezialisiertes Skalpel für die Entfernung der Nieren.</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Organbeschaffungsskalpel: Lunge</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Ein spezialisiertes Skalpel für die Entfernung der Lunge.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Organbeschaffungsskalpel: Herz</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Ein spezialisiertes Skalpel für die Entfernung des Herzes.</entitydescription.organscalpel_heart>
-
 
 
 <!-- /// Behandlungen /// -->
@@ -352,8 +340,11 @@ Kann spenden an: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Nierenversagen</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Nieren entfernt</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Die Nieren wurden operative entfernt.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Nieren entfernt</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Die Nieren wurden operative entfernt.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Nieren entfernt</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Die Nieren wurden operative entfernt.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

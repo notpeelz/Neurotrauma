@@ -45,16 +45,6 @@
   <entitydescription.spinalimplant>목 골절로 인한 마비를 치료하는 데 사용되는 티타늄 임플란트.</entitydescription.spinalimplant>
   <entityname.operatingtable>수술대</entityname.operatingtable>
   <entitydescription.operatingtable>기본적인 인공호흡기가 내장된 수술대입니다.</entitydescription.operatingtable>
-  <entityname.organscalpel_liver>장기 적출용 메스: 간</entityname.organscalpel_liver>
-  <entitydescription.organscalpel_liver>간 적출을 위한 특수 메스.</entitydescription.organscalpel_liver>
-  <entityname.organscalpel_kidneys>장기 적출용 메스: 신장</entityname.organscalpel_kidneys>
-  <entitydescription.organscalpel_kidneys>신장 적출용 특수 메스.</entitydescription.organscalpel_kidneys>
-  <entityname.organscalpel_lungs>장기 적출용 메스: 폐</entityname.organscalpel_lungs>
-  <entitydescription.organscalpel_lungs>폐를 적출하기 위한 특수 메스.</entitydescription.organscalpel_lungs>
-  <entityname.organscalpel_heart>장기 적출용 메스: 심장</entityname.organscalpel_heart>
-  <entitydescription.organscalpel_heart>심장 적출을 위한 특수 메스.</entitydescription.organscalpel_heart>
-  <entityname.organscalpel_brain>장기 적출용 메스: 뇌</entityname.organscalpel_brain>
-  <entitydescription.organscalpel_brain>뇌를 적출하기 위한 특수 메스.</entitydescription.organscalpel_brain>
   <!-- /// Treatments /// -->
   <entityname.mannitol>만니톨</entityname.mannitol>
   <entitydescription.mannitol>당 환원 알코올의 일종. 신경 외상으로부터 회복을 돕기 위해 사용됩니다. 장기 손상을 일으킬 수 있습니다.</entitydescription.mannitol>
@@ -287,8 +277,10 @@
 <afflictiondescription.kidneydamage></afflictiondescription.kidneydamage>
 <afflictionname.kidneyfailure>신부전</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
-<afflictionname.kidneyremoved>신장이 제거됨</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>신장은 수술로 제거되었습니다.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>신장이 제거됨</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>신장은 수술로 제거되었습니다.</afflictiondescription.kidney1removed>
+<afflictionname.kidney2removed>신장이 제거됨</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>신장은 수술로 제거되었습니다.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 <afflictionname.bonedamage>뼈 손상</afflictionname.bonedamage>

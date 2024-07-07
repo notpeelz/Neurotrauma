@@ -69,21 +69,6 @@
 <entityname.operatingtable>Операционный стол</entityname.operatingtable>
 <entitydescription.operatingtable>Операционный стол со встроенным аппаратом искусственной вентиляции.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Скальпель для извлечения органов: Печень</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Специализированный скальпель для удаления печени.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Скальпель для извлечения органов: Почки</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Специализированный скальпель для удаления почек.</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Скальпель для извлечения органов: Лёгкие</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Специализированный скальпель для удаления лёгких.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Скальпель для извлечения органов: Сердце</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Специализированный скальпель для удаления сердца.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Скальпель для извлечения: мозг</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Специализированный скальпель для удаления мозга.</entitydescription.organscalpel_brain>
-
 
 <!-- /// Средства /// -->
 <entityname.mannitol>Маннитол</entityname.mannitol>
@@ -383,8 +368,11 @@
 <afflictionname.kidneyfailure>Отказ почек</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Удалённые почки</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Почки хирургически удалены.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Удалённые почки</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Почки хирургически удалены.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Удалённые почки</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Почки хирургически удалены.</afflictiondescription.kidney2removed>
 
 <!-- /// Кости /// -->
 

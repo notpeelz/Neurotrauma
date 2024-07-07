@@ -302,9 +302,9 @@ Timer.Wait(function()
       elseif c.stats.bonegrowthCount + c.stats.cyberlimbCount >= 6 then
         c.afflictions[i].strength = c.afflictions[i].strength - 2 * NT.Deltatime
       end
-      if c.afflictions.kidneydamage.strength > 70 then
+      if c.afflictions.kidneydamage.strength > 140 then
         c.afflictions[i].strength = c.afflictions[i].strength
-          + (c.afflictions.kidneydamage.strength - 70) / 30 * 0.15 * NT.Deltatime
+          + (c.afflictions.kidneydamage.strength - 140) / 30 * 0.15 * NT.Deltatime
       end
     end,
   }

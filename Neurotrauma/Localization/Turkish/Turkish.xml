@@ -69,21 +69,6 @@
 <entityname.operatingtable>Ameliyat Masası</entityname.operatingtable>
 <entitydescription.operatingtable>Yerleşik temel yapay havalandırmaya sahip bir ameliyat masası.</entitydescription.operatingtable>
 
-<entityname.organscalpel_liver>Organ tedarik neşteri: Karaciğer</entityname.organscalpel_liver>
-<entitydescription.organscalpel_liver>Karaciğer dokusunu kesmek için özel üretilen neşter.</entitydescription.organscalpel_liver>
-
-<entityname.organscalpel_kidneys>Organ tedarik neşteri:Böbrek</entityname.organscalpel_kidneys>
-<entitydescription.organscalpel_kidneys>Böbrek dokusunu kesmek için özel üretilen neşter..</entitydescription.organscalpel_kidneys>
-
-<entityname.organscalpel_lungs>Organ Tedarik Neşteri:Akciğer</entityname.organscalpel_lungs>
-<entitydescription.organscalpel_lungs>Akciğer dokusunu kesmek için özel üretilen neşter.</entitydescription.organscalpel_lungs>
-
-<entityname.organscalpel_heart>Organ Tedarik Neşteri: Kalp</entityname.organscalpel_heart>
-<entitydescription.organscalpel_heart>Kalp dokusunu kesmek için özel üretilen neşter.</entitydescription.organscalpel_heart>
-
-<entityname.organscalpel_brain>Organ Tedarik Neşteri: Beyin</entityname.organscalpel_brain>
-<entitydescription.organscalpel_brain>Beyin dokusunu kesmek için özel üretilen neşter.</entitydescription.organscalpel_brain>
-
 
 
 <!-- /// Treatments /// -->
@@ -390,8 +375,11 @@ Can give blood to: AB+</entitydescription.abpluscard>
 <afflictionname.kidneyfailure>Böbrek İflası</afflictionname.kidneyfailure>
 <afflictiondescription.kidneyfailure></afflictiondescription.kidneyfailure>
 
-<afflictionname.kidneyremoved>Böbreksiz</afflictionname.kidneyremoved>
-<afflictiondescription.kidneyremoved>Böbrekler cerrahi olarak çıkarıldı.</afflictiondescription.kidneyremoved>
+<afflictionname.kidney1removed>Böbreksiz</afflictionname.kidney1removed>
+<afflictiondescription.kidney1removed>Böbrekler cerrahi olarak çıkarıldı.</afflictiondescription.kidney1removed>
+
+<afflictionname.kidney2removed>Böbreksiz</afflictionname.kidney2removed>
+<afflictiondescription.kidney2removed>Böbrekler cerrahi olarak çıkarıldı.</afflictiondescription.kidney2removed>
 
 <!-- /// bones /// -->
 

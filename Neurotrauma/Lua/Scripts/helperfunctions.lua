@@ -203,6 +203,13 @@ function NT.Fibrillate(character, amount)
   HF.SetAffliction(character, "fibrillation", fibrillation)
 end
 
+function NT.InflictPain(to, from)
+  if not HF.CanScream(to) then
+    return
+  end
+  HF.AddAffliction(to, "severepainlite", 2, from)
+end
+
 HF = {} -- Helperfunctions
 
 function HF.Lerp(a, b, t)
@@ -875,13 +882,17 @@ function HF.CharacterToClient(character)
   return nil
 end
 
-function HF.ClientFromName(name)
+function HF.GetClientByAccountId(accountId)
   if not SERVER then
     return nil
   end
 
+  if type(accountId) == "string" then
+    accountId = AccountId.Parse(accountId)
+  end
+
   for key, client in pairs(Client.ClientList) do
-    if client.Name == name then
+    if accountId == client.AccountId then
       return client
     end
   end
@@ -969,9 +980,21 @@ function HF.PutItemInsideItem(container, identifier, index)
 end
 
 function HF.CanPerformSurgeryOn(character)
-  return HF.HasAffliction(character, "analgesia", 1)
-    or HF.HasAffliction(character, "sym_unconsciousness", 0.1)
-    or HF.HasAffliction(character, "afadrenaline", 1)
+  return HF.HasAffliction(character, "afadrenaline", 1)
+    or not HF.CanFeelPain(character)
+    or HF.IsUnconscious(character)
+end
+
+function HF.IsUnconscious(character)
+  return HF.HasAffliction(character, "sym_unconsciousness", 0.1)
+end
+
+function HF.CanFeelPain(character)
+  return not HF.HasAffliction(character, "analgesia", 9)
+end
+
+function HF.CanScream(character)
+  return not HF.IsUnconscious(character) and not HF.HasAffliction(character, "stun", 0.1)
 end
 
 -- converts thighs, feet, forearms and hands into legs and arms
