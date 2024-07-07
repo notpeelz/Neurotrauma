@@ -1,12 +1,11 @@
-
 -- this file is for giving items tags for the purpose of cooking without overriding said items to include those tags in the xml file
 
 NTMB.Ingredients = {
-    livertransplant={tags={"meatsaladIngredient","pizzaTopping","meat"}},
-    kidneytransplant={tags={"meatsaladIngredient","pizzaTopping","meat"}},
-    lungtransplant={tags={"meatsaladIngredient","pizzaTopping","meat"}},
-    hearttransplant={tags={"meatsaladIngredient","pizzaTopping","meat"}},
-    braintransplant={tags={"meatsaladIngredient","pizzaTopping","meat"}},
+  livertransplant = { tags = { "meatsaladIngredient", "pizzaTopping", "meat" } },
+  kidneytransplant = { tags = { "meatsaladIngredient", "pizzaTopping", "meat" } },
+  lungtransplant = { tags = { "meatsaladIngredient", "pizzaTopping", "meat" } },
+  hearttransplant = { tags = { "meatsaladIngredient", "pizzaTopping", "meat" } },
+  braintransplant = { tags = { "meatsaladIngredient", "pizzaTopping", "meat" } },
 }
 
 NTMB.Ingredients.livertransplant_q1 = NTMB.Ingredients.livertransplant
